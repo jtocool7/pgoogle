@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google But Me</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+<h1>
+codeMyster
+</h1>
+  <form id="form" autocomplete="off">
+  <div class="form-group"> 
+  <input type="text" id="search" class="form-control"  placeholder="SEARCH">
+  </div>
+  <div class="form-group">
+    <Button class="btn btn-danger btn-block">Search</Button>
+  </div>
+  </form>
+    <div id="result"></div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  $('#form').submit(function(e){
+  e.preventDefault();
+  var query = $('#search').val();
+  
+  var API_KEY = 'b0af6b4f4a60d23fb15e4b327a8496d6'
+  
+  var url = 'http://api.serpstack.com/search?access_key=' + API_KEY + '&type=web&query=' + query
+    
+    $.get(url,function(data){
+        console.log(data);
+        console.log(query);
+        
+    data.organic_results.forEach(res => {
+        result = `<h1>${res.title}</h1><br><a href="{res.url}">${res.url}</a>
+<p>${res.snippet}</p>`
+        
+        $("#result").append(result);
+    });
+        
+        
+    });
+  
+  })
+  </script>
+</body>
+</html>
